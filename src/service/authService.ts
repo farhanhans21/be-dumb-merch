@@ -4,7 +4,7 @@ import * as authrepo from "../repository/authRepo";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const register = async (bodyRegis: RegisterDTo) => {
+export const  register = async (bodyRegis: RegisterDTo) => {
   const existUser = await authrepo.findUserByEmail(bodyRegis.email);
 
   if (existUser) {
@@ -46,7 +46,7 @@ export const login = async (bodyLogin: LoginDTO) => {
     {
       id: getUser.id,
       username: getUser.email,
-      password: getUser.password
+      role: getUser.role
     },
     process.env.JWT_SECRET || "your-secret-key",
     { expiresIn: "1d" }

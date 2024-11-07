@@ -3,7 +3,6 @@ import { LoginDTO, RegisterDTo } from "../dto/authDTO";
 
 import * as authService from "../service/authService";
 
-
 export const register = async (req: Request, res: Response) => {
   try {
     const bodyRegis = req.body as RegisterDTo;
@@ -18,18 +17,25 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-
 export const login = async (req: Request, res: Response) => {
   try {
     const bodyLogin = req.body as LoginDTO;
-    
-    const loginToken = await authService.login(bodyLogin);
-    
-    res.status(200).json(loginToken)
+
+    const token = await authService.login(bodyLogin);
+
+    res.status(200).json({token});
   } catch (error) {
     console.log(error);
     const err = new Error();
     res.status(500).json({ massage: err.message });
+  }
+};
+export const authCheck = async (req: Request, res: Response) => {
+  try {
+    const user = res.locals.user;
+    res.status(200).json({user});
+  } catch (error) {
+    console.log(error);
     
   }
 }

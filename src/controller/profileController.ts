@@ -21,3 +21,20 @@ export const update = async (req: Request, res: Response) => {
     res.status(500).json({ massage: err.message });
   }
 };
+
+export const getProfile = async (req: Request, res: Response) => {
+  try {
+    const userId = +res.locals.user.id;
+    console.log(userId);
+    
+    const profile = await profileService.getProfile(userId);
+    
+    res.status(200).json(profile);
+  } catch (error) {
+    console.log(error);
+
+    const err = new Error();
+    res.status(500).json({ massage: err.message });
+    
+  }
+}

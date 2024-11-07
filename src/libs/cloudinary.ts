@@ -15,9 +15,9 @@ const uploader = async(files: Express.Multer.File[])=>{
       const b64 = Buffer.from(file.buffer).toString('base64')
       const dataURI = 'data:' + file.mimetype + ';base64,' + b64
       const uplaodedFile = await cloudinary.uploader.upload(dataURI,{
-        folder: 'new_circle'
+        folder: 'dumb-merch'
       })
-      urls.push({imageUrl: uplaodedFile.secure_url})
+      urls.push({url: uplaodedFile.secure_url})
     }
   )
   )
