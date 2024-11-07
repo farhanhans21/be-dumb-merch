@@ -21,7 +21,7 @@ export const getProfile = async (userId: number) => {
   result =  await prisma.$queryRaw
     `
     SELECT 
-    CONCAT("firstName", ' ', "lastName") AS fullname,
+    CONCAT("firstName", ' ', "lastName") AS fullName,
     address,
     phone,
     gender,
